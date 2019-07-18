@@ -1,5 +1,5 @@
 context('CUSTOMER TESTS', () => {
- const loginPage  = 'https://dev4.novoshore.com/ords/f?p=108:LOGIN_DESKTOP:9070950415987:::::'
+ const loginPage  = 'https://dev4.novoshore.com/ords/f?p=108:LOGIN_DESKTOP'
  const pUsername   = 'DENIS'
  const pPassword   = '1234'
  var   loggedInPage
