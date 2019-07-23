@@ -45,6 +45,8 @@ before(function() {
     cy.contains('Projects').click()
  })
 
+
+
  it('Create Project', () => {
    //cy.setCookie('ORA_WWV_APP_108', app_cookie)
    cy.get('#B29368102051203299').click()
@@ -119,9 +121,49 @@ before(function() {
 
    })
 
+
+
+
+   it('Edit Project', () => {
+     //cy.setCookie('ORA_WWV_APP_108', app_cookie)
+
+     const NewName = Math.random().toString(36).substring(2, 8)
+
+     cy.get('#B33661964374926004').click()
+
+     cy.get('iframe')
+      .wait(1000)
+      .then($iframe => {
+        const iframe = $iframe.contents()
+        const myInput0 = iframe.find('#P23_NAME')
+        const myButton = iframe.find('#B29370349402203301')
+
+        cy
+          .wrap(myInput0)
+          .clear()
+          .type(NewName)
+          .should('have.value', NewName)
+
+        cy.wait(5000)
+        cy.wrap(myButton).click()
+
+       })
+  })
+
+
+
+
+
    it('Create Order inside Project', () => {
      //cy.setCookie('ORA_WWV_APP_108', app_cookie)
      const Order = Math.random().toString(36).substring(2, 8)
+
+     cy.url().should('contain', ':42:')
+             .then(($url) => {
+                loggedInPage = $url
+                loggedInPage = loggedInPage.replace('/__/','/ords/')
+                cy.visit(loggedInPage)
+            })
 
      cy.get('#B31960122872238115').click()
 
@@ -180,13 +222,58 @@ before(function() {
            })
 
            cy.get('.t-Alert-title')  //simply check the modal has been closed
-
      })
+
+
+
+
+
+     it('Edit Order', () => {
+       //cy.setCookie('ORA_WWV_APP_108', app_cookie)
+
+       const NewOrder = Math.random().toString(36).substring(2, 8)
+
+       cy.get('#B33662320698926008').click()
+
+       cy.get('iframe')
+        .wait(1000)
+        .then($iframe => {
+          const iframe = $iframe.contents()
+          const myInput0 = iframe.find('#P21_ORDERNUMBER')
+          const myInput1 = iframe.find('#P21_DELIVERYDATE')
+          const myButton = iframe.find('#B29352754070203277')
+
+          cy
+            .wrap(myInput0)
+            .clear()
+            .type(NewOrder)
+            .should('have.value', NewOrder)
+
+          cy
+            .wrap(myInput1)
+            .clear()
+            .type('01-Dec-19', {force: true})
+            .should('have.value', '01-Dec-19')
+
+          cy.wait(5000)
+          cy.wrap(myButton).click()
+
+         })
+
+       })
+
+
+
 
      it('Create Order Line inside Project', () => {
        //cy.setCookie('ORA_WWV_APP_108', app_cookie)
-       const Quantity = Math.floor(Math.random()*100)
-       const UnitPrice = Math.floor(Math.random()*1000)
+
+       cy.url().should('contain', ':44:')
+               .then(($url) => {
+                  loggedInPage = $url
+                  loggedInPage = loggedInPage.replace('/__/','/ords/')
+                  cy.visit(loggedInPage)
+              })
 
        cy.get('#B32076287681864020').click()
 
